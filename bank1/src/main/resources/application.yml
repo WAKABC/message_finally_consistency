@@ -1,0 +1,33 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.118.103:3306/bank1?useUnicode=true&characterEncoding=UTF-8&useServerPrepStmts=false&rewriteBatchedStatements=true
+    username: root
+    password: root
+    hikari:
+      connection-timeout: 5000
+      maximum-pool-size: 5
+      minimum-idle: 1
+      keepalive-time: 6000
+      idle-timeout: 3000
+
+mybatis:
+  mapper-locations: "classpath:mapper/*.xml"
+  configuration:
+    cache-enabled: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+rocketmq:
+  name-server: 192.168.118.104:9876
+  consumer:
+    group: bank1_consumer_group
+    pull-batch-size: 10
+  producer:
+    group: bank1_producer_group
+    send-message-timeout: 3000
+    retry-times-when-send-failed: 3
+    retry-times-when-send-async-failed: 2
+    max-message-size: 4096
+    compress-message-body-threshold: 4096
+    retry-next-server: false
+
